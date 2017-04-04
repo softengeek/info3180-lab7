@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import urlparse
 
-url = "https://www.walmart.com/ip/54649026"
+url = "https://www.pinterest.com/pin/ASIR9Qiteqmvw0kRX7rqeEAMZHjkRk3xJ8JldSj9fWX4wlD0TSRI3lI/"
 result = requests.get(url)
 soup = BeautifulSoup(result.text, "html.parser")
 
@@ -19,8 +19,11 @@ if thumbnail_spec and thumbnail_spec['href']:
     print thumbnail_spec['href']
     print ''
 
-
-image = """<img src="%s"><br />"""
-for img in soup.findAll("img", src=True):
-   print image % urlparse.urljoin(url, img["src"])
-   print ''
+def image_list(url):
+    result = requests.get(url)
+    soup = BeautifulSoup(result.text, "html.parser")
+    images=[]
+    image = """<img src="%s"><br />"""
+    for img in soup.findAll("img", src=True):
+           images+=[image % urlparse.urljoin(url, img["src"])]
+    return images
