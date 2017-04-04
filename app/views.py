@@ -32,6 +32,11 @@ def thumbnails():
         status = "Failed"
     
     return jsonify(status=status,images=images)
+    
+@app.route('/thumbnails/view')
+def thumbs_list():
+    """ Render a page for viewing a list of all thumbnails grabbed """
+    return render_template('thumbnails.html')
 
 ###
 # The functions below should be applicable to all Flask apps.
